@@ -3,12 +3,12 @@ name: Linting and Pre-commit checks for jivas PhonemeInteractAction
 on:
   pull_request:
     paths:
-      - "phoneme_interact_action_model_action/**"
+      - "phoneme_interact_action/**"
   push:
     branches:
       - main
     paths:
-      - "phoneme_interact_action_model_action/**"
+      - "phoneme_interact_action/**"
 
 jobs:
   pre-commit-jaclang:
