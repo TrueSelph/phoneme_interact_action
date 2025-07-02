@@ -12,7 +12,7 @@ JIVAS action for managing phoneme-based prompting to customize the pronunciation
 
 - **Name:** `jivas/phoneme_interact_action`
 - **Author:** [V75 Inc.](https://v75inc.com/)
-- **Architype:** `PhonemeInteractAction`
+- **archetype:** `PhonemeInteractAction`
 
 ## Meta Information
 
@@ -29,9 +29,9 @@ JIVAS action for managing phoneme-based prompting to customize the pronunciation
 
 ## Dependencies
 
-- **Jivas:** `^2.0.0`
+- **Jivas:** `^2.1.0`
 - **Actions:**
-  - `jivas/persona_interact_action`: `^0.0.1`
+  - `jivas/persona_interact_action`: `^0.1.0`
 - **Pip:**
   - `types-PyYAML`
   - `types-requests`

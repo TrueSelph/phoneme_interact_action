@@ -1,7 +1,7 @@
 """This module renders the app for the Phoneme Interact action."""
 
 import streamlit as st
-from jvcli.client.lib.widgets import app_header, app_update_action, dynamic_form
+from jvclient.lib.widgets import app_header, app_update_action, dynamic_form
 from streamlit_router import StreamlitRouter
 
 
