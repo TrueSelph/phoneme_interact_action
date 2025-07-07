@@ -39,7 +39,7 @@ node PhonemeInteractAction(InteractAction) {
 
         if(phoneme_content) {
             message = visitor.interaction_node.get_message();
-            message.set_meta('phoneme_content', phoneme_content);
+            message.data_set('phoneme_content', phoneme_content);
             visitor.interaction_node.set_message(message);
         }
 
