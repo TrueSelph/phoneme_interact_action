@@ -2,8 +2,8 @@ import logging;
 import traceback;
 import from logging { Logger }
 import from jivas.agent.action.interact_action { InteractAction }
+import from jivas.agent.action.agent_graph_walker { agent_graph_walker }
 import from .modules.phoneme_utils { PhonemeUtils }
-
 
 node PhonemeInteractAction(InteractAction) {
     # manages phoneme-based prompting to customize the pronunciation of certain words for text-to-speech models used by an agent
@@ -26,13 +26,13 @@ node PhonemeInteractAction(InteractAction) {
 
     }
 
-    def touch(visitor: interact_graph_walker) -> bool {
+    def touch(visitor: agent_graph_walker) -> bool {
         if(visitor.interaction_node.has_response() and visitor.tts) {
             return True;
         }
     }
 
-    def execute(visitor: interact_graph_walker) -> None {
+    def execute(visitor: agent_graph_walker) -> None {
         # must run last.. look for the message and add the phoneme_message key to the interaction
         # go through the message and replace phonemes
         phoneme_content = PhonemeUtils.phonetic_format(visitor.interaction_node.get_message().get_content(), self.phonemes);
