@@ -1,1 +1,3 @@
-include:jac phoneme_interact_action;
+import from actions.jivas.phoneme_interact_action {
+    phoneme_interact_action
+}

@@ -1,11 +1,11 @@
-import:py logging;
-import:py traceback;
-import:py from logging { Logger }
-import:jac from jivas.agent.action.interact_action { InteractAction }
-import:py from .modules.phoneme_utils { PhonemeUtils }
+import logging;
+import traceback;
+import from logging { Logger }
+import from jivas.agent.action.interact_action { InteractAction }
+import from jivas.agent.action.agent_graph_walker { agent_graph_walker }
+import from .modules.phoneme_utils { PhonemeUtils }
 
-
-node PhonemeInteractAction :InteractAction: {
+node PhonemeInteractAction(InteractAction) {
     # manages phoneme-based prompting to customize the pronunciation of certain words for text-to-speech models used by an agent
     # always ensure that this is registered after the final response is generated
 
@@ -15,7 +15,7 @@ node PhonemeInteractAction :InteractAction: {
     has language:str = "en";
     has phonemes:dict = {}; # a key-value set of words and their corresponding phonetic representation in IPA, CMU or plain text
 
-    can post_register() {
+    def post_register() {
         # to ensure compatibility, add this action to the exception list in intent_classifier
 
         if(intent_interact_action_node := self.get_agent().get_actions().get(action_label='IntentInteractAction')) {
@@ -26,28 +26,27 @@ node PhonemeInteractAction :InteractAction: {
 
     }
 
-    can touch(visitor: interact_graph_walker) -> bool {
+    def touch(visitor: agent_graph_walker) -> bool {
         if(visitor.interaction_node.has_response() and visitor.tts) {
             return True;
         }
     }
 
-    can execute(visitor: interact_graph_walker) -> dict {
+    def execute(visitor: agent_graph_walker) -> None {
         # must run last.. look for the message and add the phoneme_message key to the interaction
         # go through the message and replace phonemes
         phoneme_content = PhonemeUtils.phonetic_format(visitor.interaction_node.get_message().get_content(), self.phonemes);
 
         if(phoneme_content) {
             message = visitor.interaction_node.get_message();
-            message.set_meta('phoneme_content', phoneme_content);
+            message.data_set('phoneme_content', phoneme_content);
             visitor.interaction_node.set_message(message);
         }
 
-        return visitor.export();
     }
 
 
-    can healthcheck() -> bool {
+    def healthcheck() -> bool {
         try {
             if(self.language){
                 return True;
