@@ -2,7 +2,7 @@ package:
   name: jivas/phoneme_interact_action
   author: V75 Inc.
   archetype: PhonemeInteractAction
-  version: 0.1.0
+  version: 0.1.2
   meta:
     title: Phoneme Interact Action
     description: Manages phoneme-based prompting to customize the pronunciation of certain words for text-to-speech models used by an agent.
