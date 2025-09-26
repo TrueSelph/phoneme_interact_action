@@ -36,7 +36,7 @@ node PhonemeInteractAction(InteractAction) {
         # must run last.. look for the message and add the phoneme_message key to the interaction
         # go through the message and replace phonemes
         message = visitor.interaction_node.get_message();
-        message_content = message.data_get('phoneme_content', message.get_content());
+        message_content = message.data_get('phoneme_content') or message.get_content();
         phoneme_content = PhonemeUtils.phonetic_format(message_content, self.phonemes);
 
         if(phoneme_content) {

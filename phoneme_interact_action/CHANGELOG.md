@@ -6,3 +6,6 @@
 
 # 0.1.1
 - Allow other actions to set phoneme_content
+
+# 0.1.2
+- Fixed bug where message_content is not set correctly
