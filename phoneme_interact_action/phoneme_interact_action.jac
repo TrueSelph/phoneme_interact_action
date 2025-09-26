@@ -35,16 +35,15 @@ node PhonemeInteractAction(InteractAction) {
     def execute(visitor: agent_graph_walker) -> None {
         # must run last.. look for the message and add the phoneme_message key to the interaction
         # go through the message and replace phonemes
-        phoneme_content = PhonemeUtils.phonetic_format(visitor.interaction_node.get_message().get_content(), self.phonemes);
+        message = visitor.interaction_node.get_message();
+        message_content = message.data_get('phoneme_content', message.get_content());
+        phoneme_content = PhonemeUtils.phonetic_format(message_content, self.phonemes);
 
         if(phoneme_content) {
-            message = visitor.interaction_node.get_message();
             message.data_set('phoneme_content', phoneme_content);
             visitor.interaction_node.set_message(message);
         }
-
     }
-
 
     def healthcheck() -> bool {
         try {
