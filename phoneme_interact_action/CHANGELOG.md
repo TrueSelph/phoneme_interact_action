@@ -9,3 +9,6 @@
 
 # 0.1.2
 - Fixed bug where message_content is not set correctly
+
+## 0.2.0
+- Updated to use persona_interact_action version 0.2.1
